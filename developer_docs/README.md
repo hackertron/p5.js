@@ -1,4 +1,4 @@
-This folder contains various documents intended for developers of p5.js.
+Hello! Thanks for your interest in contributing to p5.js! You can get started with some different ways of contributing [here](https://p5js.org/community/#contribute). This folder contains various documents intended for developers of p5.js.
 
 # Project Directory Structure
 
@@ -78,7 +78,7 @@ $ grunt
 Sometimes it is useful to run the tests in the browser instead of on the command line. To do this, first start the [connect](https://github.com/gruntjs/grunt-contrib-connect) server:
 
 ```
-$ npm run grunt connect -keepalive
+$ npm run dev
 ```
 
 With the server running, you should be able to open `test/test.html` in a browser.
@@ -108,7 +108,7 @@ A complete guide to unit testing is beyond the scope of the p5.js documentation,
    $ npm run grunt
    ```
    
-   If you're continuously changing files in the library, you may want to run `npm run grunt watch:quick` to automatically rebuild the library for you whenever any of its source files change without you having to first type the command manually.
+   If you're continuously changing files in the library, you may want to run `npm run dev` to automatically rebuild the library for you whenever any of its source files change without you having to first type the command manually.
 
 6. Make some changes to the codebase and [commit](https://help.github.com/articles/github-glossary/#commit) them with Git.
 

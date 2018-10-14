@@ -26,6 +26,10 @@ var _windowPrint = window.print;
  * the function. Individual elements can be
  * separated with quotes ("") and joined with the addition operator (+).
  *
+ * Note that calling print() without any arguments invokes the window.print()
+ * function which opens the browser's print dialog. To print a blank line
+ * to console you can write print('\n').
+ *
  * @method print
  * @param {Any} contents any combination of Number, String, Object, Boolean,
  *                       Array to print
@@ -169,8 +173,11 @@ p5.prototype.cursor = function(type, x, y) {
  * the function call frameRate(30) will attempt to refresh 30 times a second.
  * If the processor is not fast enough to maintain the specified rate, the
  * frame rate will not be achieved. Setting the frame rate within <a href="#/p5/setup">setup()</a> is
- * recommended. The default rate is 60 frames per second. This is the same as
- * setFrameRate(val).
+ * recommended. The default frame rate is based on the frame rate of the display
+ * (here also called "refresh rate"), which is set to 60 frames per second on most
+ * computers. A frame rate of 24 frames per second (usual for movies) or above
+ * will be enough for smooth animations
+ * This is the same as setFrameRate(val).
  * <br><br>
  * Calling <a href="#/p5/frameRate">frameRate()</a> with no arguments returns the current framerate. The
  * draw function must run at least once before it will return a value. This
@@ -288,8 +295,10 @@ p5.prototype.noCursor = function() {
 };
 
 /**
- * System variable that stores the width of the entire screen display. This
- * is used to run a full-screen program on any display size.
+ * System variable that stores the width of the screen display according to The
+ * default <a href="#/p5/pixelDensity">pixelDensity</a>. This is used to run a
+ * full-screen program on any display size. To return actual screen size,
+ * multiply this by pixelDensity.
  *
  * @property {Number} displayWidth
  * @readOnly
@@ -305,8 +314,10 @@ p5.prototype.noCursor = function() {
 p5.prototype.displayWidth = screen.width;
 
 /**
- * System variable that stores the height of the entire screen display. This
- * is used to run a full-screen program on any display size.
+ * System variable that stores the height of the screen display according to The
+ * default <a href="#/p5/pixelDensity">pixelDensity</a>. This is used to run a
+ * full-screen program on any display size. To return actual screen size,
+ * multiply this by pixelDensity.
  *
  * @property {Number} displayHeight
  * @readOnly
@@ -530,10 +541,10 @@ p5.prototype.pixelDensity = function(val) {
       this._pixelsDirty = true;
     }
     returnValue = this;
+    this.resizeCanvas(this.width, this.height, true); // as a side effect, it will clear the canvas
   } else {
     returnValue = this._pixelDensity;
   }
-  this.resizeCanvas(this.width, this.height, true);
   return returnValue;
 };
 
